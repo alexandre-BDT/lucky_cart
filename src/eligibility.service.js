@@ -29,12 +29,12 @@ class EligibilityService {
       }
     } else {
       const conditionFunction = CONDITIONS[key] ?? CONDITIONS.eq;
-      eligibility = conditionFunction(value, criterion);
+      eligibility.push(conditionFunction(value, criterion));
     }
     if (key === 'and' || key === 'or') {
       return eligibility = CONDITIONS[key](eligibility);
     }
-    return eligibility?.[0] ?? eligibility;
+    return eligibility?.[0];
   }
 
   isEligible(cart, criteria) {
